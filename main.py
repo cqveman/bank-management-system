@@ -117,7 +117,7 @@ while True:
                 print('Username Available ✔')
                 break
 
-            print("✘ Username is taken. Please try again.")
+            username = input('✘ Username is taken. Please try again:\n')
 
         password = input('Password: ')
 
