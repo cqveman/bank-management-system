@@ -102,15 +102,24 @@ while True:
                         break
             email = input('\nInvalid Email. Please use this format "example@gmail.com":\n')
 
-        username = input('\nUsername: ').strip()
+        username = input('Username: ').strip()
+
+        waitingAnimation('Checking Availability', 1, 3)
+
         while True:
-            if username not in users:
+            found = False
+            for user in users:
+                if user.get("username") == username:
+                    found = True
+                    break
+
+            if not found:
                 print('Username Available ✔')
                 break
-            username = input('✘ Username is taken. Please try again:\n')
+
+            print("✘ Username is taken. Please try again.")
 
         password = input('Password: ')
-
 
     elif choice == 'login':
         ...
