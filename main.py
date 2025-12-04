@@ -103,7 +103,6 @@ while True:
             email = input('\nInvalid Email. Please use this format "example@gmail.com":\n')
 
         username = input('Username: ').strip()
-
         waitingAnimation('Checking Availability', 1, 3)
 
         while True:
@@ -120,6 +119,7 @@ while True:
             username = input('✘ Username is taken. Please try again:\n')
 
         password = input('Password: ')
+        waitingAnimation('Validating Password', 1, 3)
 
         while True:
             if ' ' not in password:
@@ -128,6 +128,26 @@ while True:
                         break
             password = input('Invalid Password. must be at least 8 characters long, '
                              'contain at least one number, and include no spaces.\nTry again: ')
+
+        users.append(
+            {
+                'username': username,
+                'full name': fullName,
+                'date of birth': dateOfBirth,
+                'gender': gender,
+                'job': job,
+                'address': address,
+                'phone number': phoneNum,
+                'email': email,
+                'balance': 0.0
+            }
+        )
+
+        with open('users.json', 'w') as f:
+            json.dump(users,f,indent=2)
+
+        waitingAnimation('Registering User', 1, 2)
+        print('Sign-up successful, your id is ' + str(len(users)))
 
     elif choice == 'login':
         ...
