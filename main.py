@@ -5,6 +5,11 @@ import datetime
 
 users = [ ]
 
+fileName = 'users.json'
+if os.path.exists(fileName) and os.path.getsize(fileName) > 2:
+    with open(fileName, 'r') as f:
+        accounts = json.load(f)
+
 def waitingAnimation(message, seconds, option=1):
     symbols = []
     if option == 1:
