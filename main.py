@@ -68,6 +68,7 @@ while True:
                 'address': address,
                 'phone number': phoneNum,
                 'email': email,
+                'password': password,
                 'balance': 0.0
             }
         )
