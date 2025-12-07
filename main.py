@@ -1,8 +1,7 @@
-import json
 import os
-import time
 
 from validation import *
+from utils import *
 
 users = []
 
@@ -10,27 +9,6 @@ fileName = 'users.json'
 if os.path.exists(fileName) and os.path.getsize(fileName) > 2:
     with open(fileName, 'r') as f:
         users = json.load(f)
-
-def saveToJson(fName):
-    with open(fName, 'w') as f:
-        json.dump(users, f, indent=2)
-
-def waitingAnimation(message, seconds, option=1):
-    symbols = []
-    if option == 1:
-        symbols = [
-            '▒▒▒▒▒▒▒▒▒▒ 0%', '██▒▒▒▒▒▒▒▒ 20%', '████▒▒▒▒▒▒ 40%',
-            '██████▒▒▒▒ 60%', '████████▒▒ 80%', '██████████ 100%'
-        ]
-    elif option == 2:
-        symbols = ['○', '◔', '◑', '◕', '●']
-    elif option == 3:
-        symbols = ['⣾', '⣷', '⣯', '⣟', '⡿', '⢿', '⣻', '⣽']
-    print()
-    for i in symbols:
-        print(f'\r{message} {i}', end='')
-        time.sleep(seconds)
-    print('\n')
 
 while True:
     print('*──────────────────Central Bank of Yemen──────────────────*')
@@ -94,8 +72,7 @@ while True:
             }
         )
 
-        saveToJson(fileName)
-
+        saveToJson(fileName, users)
         waitingAnimation('Registering User', 1, 2)
         print('Sign-up successful, your id is ' + str(len(users)))
 
