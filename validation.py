@@ -1,5 +1,4 @@
 import datetime
-from main import users
 
 def validate(value, check, errorMessage):
     while True:
@@ -65,18 +64,13 @@ def emailValidator(email):
                 return True
     return False
 
-def usernameValidator(username):
-    found = False
+def usernameValidator(username, users):
     for user in users:
         if user.get("username") == username:
-            found = True
-            break
+            return False
 
-    if not found:
-        print('Username Available ✔')
-        return True
-
-    return False
+    print('Username Available ✔')
+    return True
 
 def passwordValidator(password):
     if ' ' not in password:

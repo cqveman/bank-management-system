@@ -2,9 +2,9 @@ import json
 import os
 import time
 
-from validators import *
+from validation import *
 
-users = [   ]
+users = []
 
 fileName = 'users.json'
 if os.path.exists(fileName) and os.path.getsize(fileName) > 2:
@@ -66,7 +66,11 @@ while True:
 
         username = input('Username: ').strip()
         waitingAnimation('Checking Availability', 1, 3)
-        username = validate(username, usernameValidator, '✘ Username is taken. Please try again:')
+        username = validate(
+            username,
+            lambda x: usernameValidator(x, users),
+            '✘ Username is taken. Please try again:'
+        )
 
         password = input('Password: ')
         waitingAnimation('Validating Password', 1, 3)
