@@ -94,3 +94,47 @@ while True:
             continue
     else:
         print('Invalid Input. Please try again.\n')
+
+while True:
+    print(f'\n*──────────────────{currentUser.get('full name')}\'s Dashboard──────────────────*')
+    print("[1] Deposit")
+    print("[2] Withdraw")
+    print("[3] Transfer")
+    print("[4] Check balance & personal info")
+    print("[5] Exit")
+
+    try:
+        choice = int(input('>> '))
+    except ValueError:
+        print('\nInvalid Choice. Please enter 1 to 5.')
+        continue
+
+    # DEPOSIT
+    if choice == 1:
+        print('\n#────────Deposit────────#')
+
+    # WITHDRAW
+    elif choice == 2:
+        print('\n#────────Withdraw────────#')
+
+    # TRANSFER
+    elif choice == 3:
+        print('\n#────────Transfer────────#')
+
+    # ACCOUNT
+    elif choice == 4:
+        print('\n#────────Account Details────────#')
+        print(f'Username: {currentUser.get('username')}')
+        print(f'Full Name: {currentUser.get('full name')}')
+        print(f'Date of Birth: {currentUser.get('date of birth')}')
+        print(f'Job: {currentUser.get('job')}')
+        print(f'Address: {currentUser.get('address')}')
+        print(f'Phone Number: +967 {currentUser.get('phone number')}')
+        print(f'Email: {currentUser.get('email')}')
+        print(f'Password: {currentUser.get('password')}')
+        print(f'Balance: {currentUser.get('balance')}')
+
+    # EXIT
+    elif choice == 5:
+        print('Buh Bye :)')
+        break
