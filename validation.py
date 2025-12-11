@@ -82,6 +82,6 @@ def loginValidator(username, password, users):
     for user in users:
         if user.get('username') == username:
             if user.get('password') == password:
-                return username
+                return user
     print('\nInvalid Username or Password. Please try again.\n')
     return -1
