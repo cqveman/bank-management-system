@@ -77,3 +77,11 @@ def passwordValidator(password):
             if len(password) >= 8:
                 return True
     return False
+
+def loginValidator(username, password, users):
+    for user in users:
+        if user.get('username') == username:
+            if user.get('password') == password:
+                return username
+    print('\nInvalid Username or Password. Please try again.\n')
+    return -1

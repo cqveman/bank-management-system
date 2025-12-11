@@ -10,6 +10,8 @@ if os.path.exists(fileName) and os.path.getsize(fileName) > 2:
     with open(fileName, 'r') as f:
         users = json.load(f)
 
+currentUser = -1
+
 while True:
     print('*──────────────────Central Bank of Yemen──────────────────*')
     print('If you already have an account please enter login')
@@ -78,6 +80,12 @@ while True:
         print('Sign-up successful, your id is ' + str(len(users)))
 
     elif choice == 'login':
-        ...
+        print('\n#────────Log-in────────#')
+
+        username = input('Username: ').strip()
+        password = input('Password: ')
+
+        currentUser = loginValidator(username, password, users)
+
     else:
         print('Invalid Input. Please try again.\n')
