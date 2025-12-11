@@ -86,6 +86,11 @@ while True:
         password = input('Password: ')
 
         currentUser = loginValidator(username, password, users)
-
+        try:
+            if currentUser.get('username') == username:
+                break
+        except (ValueError, AttributeError):
+            print('\nInvalid Username or Password. Please try again.\n')
+            continue
     else:
         print('Invalid Input. Please try again.\n')
