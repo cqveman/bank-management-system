@@ -8,21 +8,21 @@ class User:
             dob, gender, job,
             address, phNum, email, password
     ):
-        self.username = username
-        self.fullName = fullName
-        self.dob = dob
-        self.gender = gender
-        self.job = job
-        self.address = address
-        self.phNum = phNum
-        self.email = email
-        self.password = password
+        self._username = username
+        self._fullName = fullName
+        self._dob = dob
+        self._gender = gender
+        self._job = job
+        self._address = address
+        self._phNum = phNum
+        self._email = email
+        self._password = password
         self.balance = 0.0
 
     # USERNAME
     @property
     def username(self):
-        return self.username
+        return self._username
 
     @username.setter
     def username(self, value):
@@ -35,7 +35,7 @@ class User:
     # NAME
     @property
     def fullName(self):
-        return self.fullName
+        return self._fullName
 
     @fullName.setter
     def fullName(self, value):
@@ -48,7 +48,7 @@ class User:
     # DATE OF BRITH
     @property
     def dob(self):
-        return self.dob
+        return self._dob
 
     @dob.setter
     def dob(self, value):
@@ -68,7 +68,7 @@ class User:
     def gender(self, value):
         value = value.strip().capitalize()
         if value == 'Male' or value == 'Female':
-            self._gender = value
+            self.gender = value
         else:
             raise ValueError('Invalid Gender. Enter either male or female.')
 
@@ -81,7 +81,7 @@ class User:
     def job(self, value):
         value = value.strip().title()
         if value.replace(' ', '').isalpha():
-            self._job = value
+            self.job = value
         else:
             raise ValueError('Invalid Job. Only letters are allowed.')
 
@@ -95,7 +95,7 @@ class User:
         value = value.strip()
         pattern = r'^\d+, [A-Za-z .]+, [A-Za-z ]+, [A-Za-z]+-\d+$'
         if bool(re.fullmatch(pattern, value)):
-            self._address = value
+            self.address = value
         else:
             raise ValueError('Invalid Address. Use format (building #, Street Name, Neighbourhood, City-Postal Code).')
 
@@ -109,7 +109,7 @@ class User:
         value = value.strip()
         pattern = r'^(?:\+967)?7\d{8}$'
         if bool(re.fullmatch(pattern, value)):
-            self._phNum = value
+            self.phNum = value
         else:
             raise ValueError('Invalid Phone Number. Use format 7********.')
 
@@ -123,7 +123,7 @@ class User:
         value = value.strip()
         pattern = r'^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$'
         if bool(re.fullmatch(pattern, value)):
-            self._email = value
+            self.email = value
         else:
             raise ValueError('Invalid Email. Use format example@gmail.com')
 
@@ -137,7 +137,7 @@ class User:
         value = value.strip()
         pattern = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9])[^\s]{8,}$'
         if bool(re.fullmatch(pattern, value)):
-            self._password = value
+            self.password = value
         else:
             raise ValueError('Invalid Password. Must have:\n'
                              'At least 8 characters\n'
