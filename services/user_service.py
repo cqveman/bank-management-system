@@ -3,23 +3,25 @@ import uuid
 from datetime import datetime
 
 from models.user import User
-from storage.user_repo import UserRepo
+from services.account_service import AccountService
+from utilities.user_repo import UserRepo
 
 
 class UserService:
-    def __init__(self, user_repo: UserRepo):
-        self.user_repo = user_repo
+    def __init__(self, user_repo: UserRepo, account_service: AccountService):
+        self._user_repo = user_repo
+        self._account_service = account_service
 
     def create_user(self, username, legal_name, date_of_birth,
                     gender, address, phone_number,
                     email, password_hash):
 
         # Checking username uniqueness
-        if any(user.username == username for user in self.user_repo.users):
+        if any(user.username == username for user in self._user_repo.users):
             return False
 
         # Checking email uniqueness
-        if any(user.email == email for user in self.user_repo.users):
+        if any(user.email == email for user in self._user_repo.users):
             return False
 
         # Checking user's age
@@ -41,17 +43,17 @@ class UserService:
         user_id = str(uuid.uuid4())
 
         user = User(
-            user_id=user_id,
-            username=username,
-            legal_name=legal_name,
-            date_of_birth=date_of_birth,
-            gender=gender,
-            address=address,
-            phone_number=phone_number,
-            email=email,
-            password_hash=password_hash,
-            accounts=[],
+            user_id,
+            username,
+            legal_name,
+            date_of_birth,
+            gender,
+            address,
+            phone_number,
+            email,
+            password_hash,
+            self._account_service.open_account(user_id, 'checking', 'YER')
         )
 
-        self.user_repo.add_user(user)
+        self._user_repo.add_user(user)
         return True
