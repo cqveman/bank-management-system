@@ -1,6 +1,6 @@
 import ttkbootstrap as tb
 
-from central_bank_of_yemen.views.b_form_view import BuildForm
+from central_bank_of_yemen.views.build_form import BuildForm
 
 
 class RegisterView(BuildForm):
