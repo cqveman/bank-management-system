@@ -18,7 +18,7 @@ class LoginView(BuildForm):
             self.card,
             text="Login",
             bootstyle="primary",
-            command=self.app.user_controller.on_login_clicked
+            command=self.app.auth_controller.on_login_clicked
         ).pack(fill="x", pady=(25, 8))
 
         tb.Button(

@@ -1,10 +1,11 @@
 from central_bank_of_yemen.services.user_service import UserService
 
 
-class UserController:
+class AuthController:
     def __init__(self, app, user_service: UserService):
         self.app = app
         self.user_service = user_service
+        self.__logged_user = None
 
     def on_register_clicked(self):
         data = self.app.frames['RegisterView'].get_form_data()
@@ -22,11 +23,20 @@ class UserController:
 
         print('Created user successfully!' if user is True
               else "Error when creating user.")
+        self.app.show_frame('LoginView')
 
     def on_login_clicked(self):
         data = self.app.frames['LoginView'].get_form_data()
 
-        is_he_logged, user = self.user_service.login(data['username'], data['password'])
+        is_logged = self.user_service.login(data['username'], data['password'])
+        current_user = self.user_service.get_current_user()
 
-        print(f'Welcome back {user.legal_name}!' if is_he_logged
-              else "Username or password is incorrect.")
+        if is_logged is True and current_user is not None:
+            self.__logged_user = current_user
+            self.app.show_frame('UserDashboardView')
+            return
+
+        print('ERROR OCCURRED')
+
+    def get_logged_user(self):
+        return self.__logged_user

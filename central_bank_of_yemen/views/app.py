@@ -1,17 +1,19 @@
 import ttkbootstrap as tb
 
-from central_bank_of_yemen.controllers.user_controller import UserController
+from central_bank_of_yemen.controllers.auth_controller import AuthController
 from central_bank_of_yemen.views.login_view import LoginView
 from central_bank_of_yemen.views.register_view import RegisterView
+from central_bank_of_yemen.views.user_dashboard_view import UserDashboardView
 
 
 class App(tb.Window):
     WIDTH = 800
     HEIGHT = 950
+    VIEWS = (RegisterView, LoginView, UserDashboardView)
 
     def __init__(self, user_service):
         super().__init__()
-        self.user_controller = UserController(self, user_service)
+        self.auth_controller = AuthController(self, user_service)
         self.frames = {}
 
         self.iconbitmap('../app.ico')
@@ -25,13 +27,13 @@ class App(tb.Window):
         container.grid_rowconfigure(0, weight=1)
         container.grid_columnconfigure(0, weight=1)
 
-        for F in (RegisterView, LoginView,):
+        for F in App.VIEWS:
             class_name = F.__name__
             frame = F(container, self)
             self.frames[class_name] = frame
             frame.grid(row=0, column=0, sticky="nsew")
 
-        self.show_frame('RegisterView')
+        self.show_frame('LoginView')
 
     def show_frame(self, class_frame_name):
         self.frames[class_frame_name].tkraise()

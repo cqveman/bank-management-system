@@ -12,7 +12,7 @@ class UserService:
     def __init__(self, user_repo: UserRepo, account_service: AccountService):
         self._user_repo = user_repo
         self._account_service = account_service
-        self.current_user = None
+        self.__current_user = None
 
     def create_user(self, username, legal_name, date_of_birth,
                     gender, address, phone_number,
@@ -65,10 +65,13 @@ class UserService:
         user = self._user_repo.get_user_by(username)
 
         if user is None:
-            return False, self.current_user
+            return False
 
         if not verify_password(password, user.password_hash):
-            return False, self.current_user
+            return False
 
-        self.current_user = user
-        return True, self.current_user
+        self.__current_user = user
+        return True
+
+    def get_current_user(self):
+        return self.__current_user
